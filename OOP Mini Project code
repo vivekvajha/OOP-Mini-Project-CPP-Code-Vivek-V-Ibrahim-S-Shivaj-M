@@ -1,9 +1,7 @@
 #include<fstream>
 #include<iostream>
-#include<string>
-#include<cstdlib>
 #include<cstring>
-#include<stdio.h>
+
 using namespace std;
 class file{
 public:
@@ -23,7 +21,7 @@ class earn
 		{
 		    ifstream x("sales.txt");
             if(!x)
-            cout<<"EARNINGS = 0 ";
+            cout<<"EARNINGS = 0 \n";
             else
             {
                 x>>profit;
@@ -117,7 +115,7 @@ class amount:public product
             char name[20];
 	        char id[20];
             cout<<"\nEnter medicine name to modify\n";
-            cin>>id;
+            cin>>name;
             char file[20];
             strcpy(file,name);
             strcat(file,".txt");
@@ -131,7 +129,10 @@ class amount:public product
 	            cout<<"file found! \n";
                 cout<<"\nupdate medicine name: \n";
   	            cin>>name;
- 	            cout<<"\nupdate cost of medicine:ne \n";
+                strcpy(file,name);
+                strcat(file,".txt");
+                ofstream f(file);
+ 	            cout<<"\nupdate cost of medicine: \n";
   	            cin>>percost;
  	            cout<<"\nupdate persell of medicine: \n";
   	            cin>>persell;
@@ -152,7 +153,7 @@ class order:public product
     void buy()
     {
         char name[20];
-        int q, quan, persell;
+        int q;
         cout<<"\nEnter medicine name\n";
         cin>>name;
         char file[20];
@@ -191,7 +192,7 @@ void admin()
 	cout<<"\n\t\t\t==============================\n\n";
 	cout<<"\n\t\t\t* * * * * * * * * * * * * * * *\n";
  	cout<<"\n\t\t\t1. Add Medicines\n\n\t\t\t2. Show profit\n\n\t\t\t3. Search Medicine Details\n\n\t\t\t4. Modify Medicine Details\n\n\t\t\t5. Sell Medicines\n\n\t\t\t6. Exit\n";
-  cout<<"\n\n\t\t\tSelect your choice\n";
+  cout<<"\n\n\t\t\tSelect your choice: ";
   int u;
   cin>>u;
     if(u==1)
@@ -207,12 +208,12 @@ void admin()
     }
     else if(u==3)
     {  
-        char id[20];
+        char name[20];
         char c;
-        cout<<"\nINPUT ID to search\n";
-        cin>>id;
+        cout<<"\nINPUT name to search\n";
+        cin>>name;
         char file[20];
-        strcpy(file,id);
+        strcpy(file,name);
         strcat(file,".txt");
         ifstream x(file);
         if(!x)
@@ -267,5 +268,6 @@ int main()
     }
     return 0;
 }
+
 
 
