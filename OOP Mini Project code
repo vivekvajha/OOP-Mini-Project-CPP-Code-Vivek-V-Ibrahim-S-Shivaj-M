@@ -1,36 +1,27 @@
-#include<fstream>
 #include<iostream>
-#include<cstring>
+#include<fstream> //used for file handling
+#include<cstring> //used for string related functions
 
 using namespace std;
-class file{
-public:
-    file()
-    {
-        ofstream fout;
-        fout.open("Pharmacy.txt");
-        fout<<"Pharmacy";
-        fout.close();
-    }
-};
-class earn
+
+class earn //For storing the data of total earnings
 {
         public:
         double profit;
-        void show()
-		{
-		    ifstream x("sales.txt");
+        void show()     //Function for displaying the data
+	{
+            ifstream x("sales.txt"); //Opens a file for reading the earnings
             if(!x)
             cout<<"EARNINGS = 0 \n";
             else
             {
                 x>>profit;
-                cout<<"\nTOTAL EARNINGS PER YEAR:  "<<profit<<endl;
+                cout<<"\nTOTAL EARNINGS PER YEAR:  "<<profit<<endl; //It will display the total earnings in sales.txt file
                 x.close();
             }
         }
 };
-class product:public virtual earn
+class product:public virtual earn   //derived virtually from class earn
 {
         public:
            int quan;
@@ -40,13 +31,14 @@ class product:public virtual earn
            double persell;
            double cost;
            double sell;
-           void cal()
-		   {
-		    cost=percost*quan;
+	   
+           void cal() //function for calculating the total cost price, total sell price and profit of a whole year
+      	   {	
+	        cost=percost*quan;
         	sell=persell*quan;
-            profit=profit +(sell-cost)*365;
-		   }
-           void file()
+                profit=profit +(sell-cost)*365;
+	   }
+           void file() //function for displaying a file of data of each and every medicine
            {
                char file[20];
                strcpy(file,name);
@@ -61,7 +53,7 @@ class product:public virtual earn
                f<<"\nsell: "<<sell;
                f.close();   
            }
-           void get()
+           void get() //function for reading the medicine data and creating a file for it
            {
                 int s;
                 cout<<"\nnumber of medicines to add\n";
@@ -78,17 +70,17 @@ class product:public virtual earn
                     cin>>persell;
                     cout<<"\nEnter the total medicine quantity: \n";
                     cin>>quan;
-                    cal();
-                    file();
+                    cal();  //calling cal function
+                    file(); //calling file function
                 }
  
             }
 };
 
-class amount:public product
+class amount:public product  //Derived from class product
 {
     public:
-    void add()
+    void add()  //function for adding medicine
     {
 	    int ch;
 	    while(1)
@@ -97,23 +89,23 @@ class amount:public product
 		    cout<<"Enter choice\n";
 		    cin>>ch;
 		    if(ch==1)
-            {
-				get();
-				ofstream x("sales.txt");
- 				x<<profit;
- 				x.close();
-			}
-			else if(ch==2)
-				break;
-			else
-				cout<<"Invaid Option. Please re-enter\n";
-		}
-	}
-    void update_item()
+                    {
+		        get();
+			ofstream x("sales.txt");
+ 			x<<profit;
+ 			x.close();
+		    }
+		    else if(ch==2)
+			break;
+		    else
+			cout<<"Invaid Option. Please re-enter\n";
+	    }
+    }
+    void update_item()  //function for updating the items in stock
     {
         {
             char name[20];
-	        char id[20];
+	    int id;
             cout<<"\nEnter medicine name to modify\n";
             cin>>name;
             char file[20];
@@ -147,10 +139,10 @@ class amount:public product
         }
     }
 };	
-class order:public product
+class order:public product  //derived from class product
 {
     public: 
-    void buy()
+    void sell()  //function to accept orders from the user
     {
         char name[20];
         int q;
@@ -163,7 +155,7 @@ class order:public product
         if(!fout)
         {
     	    cout<<"The medicine is not available. \n";
-	    }
+	}
         else
         {
             cout<<"The medicine is available. \n";
@@ -183,7 +175,7 @@ class order:public product
         } 
     }
 };
-void admin()
+void admin()  //function for displaying the main menu
 {
   while(1)
   {
@@ -197,14 +189,14 @@ void admin()
   cin>>u;
     if(u==1)
     {
-        amount a;
-        a.show();
-        a.add();
+        amount a;  //object 'a' created 
+        a.show();  //calling for function show
+        a.add();   //calling for function add
     }
     else if(u==2)
     {
-        amount d;
-        d.show();
+        amount d;  //object 'd' created
+        d.show();  //calling for function show
     }
     else if(u==3)
     {  
@@ -219,7 +211,7 @@ void admin()
         if(!x)
         {
     	    cout<<"file couldn't be opened. product ID not found. \n";
-	    }
+	}
         while(x)
         {
             x.get(c);
@@ -229,13 +221,13 @@ void admin()
     }
     else if(u==4)
     {
-	    amount u;
-	    u.update_item();
+	    amount u;          //object 'u' created
+	    u.update_item();  //calling for function update_item
     }
     else if(u==5)
     {
-        order o;
-        o.buy();
+        order o;         //object 'o' created
+        o.sell();        //calling for function add
     }
 }
 }
@@ -256,10 +248,10 @@ int main()
         switch(ch)
         {
             case 1:
-                admin();
+                admin();  //Admin function will be called if the user chooses 1
                 break;
             case 2:
-                exit(0);
+                exit(0);  //The user will exit from the system if he chooses 2
                 break;
             default:
                 cout<<"Enter valid choice\n";
