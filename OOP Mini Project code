@@ -114,27 +114,27 @@ class amount:public product  //Derived from class product
             fstream fout(file, ios::in|ios::out);
             if(!fout)
             {
-    	        cout<<"file couldn't be opened. medicine ID not found. \n";
-	        }
-	        else 
+    	        cout<<"file couldn't be opened. medicine name not found. \n";
+	    }
+	    else 
             {
-	            cout<<"file found! \n";
+	        cout<<"file found! \n";
                 cout<<"\nupdate medicine name: \n";
-  	            cin>>name;
+  	        cin>>name;
                 strcpy(file,name);
                 strcat(file,".txt");
                 ofstream f(file);
- 	            cout<<"\nupdate cost of medicine: \n";
-  	            cin>>percost;
- 	            cout<<"\nupdate persell of medicine: \n";
-  	            cin>>persell;
- 	            cout<<"\nupdate total medicine quantity: \n";
- 	            cin>>quan;
+ 	        cout<<"\nupdate cost of medicine: \n";
+  	        cin>>percost;
+ 	        cout<<"\nupdate persell of medicine: \n";
+  	        cin>>persell;
+ 	        cout<<"\nupdate total medicine quantity: \n";
+ 	        cin>>quan;
                 cost=percost*quan;
                 sell=persell*quan;
-	            profit=profit +(sell-cost)*365;
-  	            fout<<"\nmedicine name: "<<name<< "\nmedicine id: "<<id<<"\npercost of medicine: " <<percost<<"\nper sell of medicine: "<<persell<<"\nquantity: "<<quan<<"\n total cost: "<<cost<<"\nsell: "<<sell;
-	            fout.close();
+	        profit=profit +(sell-cost)*365;
+  	        fout<<"\nmedicine name: "<<name<< "\nmedicine id: "<<id<<"\npercost of medicine: " <<percost<<"\nper sell of medicine: "<<persell<<"\nquantity: "<<quan<<"\n total cost: "<<cost<<"\nsell: "<<sell;
+	        fout.close();
             }
         }
     }
